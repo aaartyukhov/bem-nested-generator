@@ -156,6 +156,7 @@ namespace bem_nested_generator
         {
             try
             {
+                
                 string ALL_HTML = richTextBox1.Text;
                 string PATH_TO_OUT_DIR = textBox1.Text;
 
@@ -221,6 +222,23 @@ namespace bem_nested_generator
             }
 
             
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            base.Capture = false;
+            Message m = Message.Create(base.Handle, 0xa1, new IntPtr(2), IntPtr.Zero);
+            this.WndProc(ref m);
         }
     }
 }
