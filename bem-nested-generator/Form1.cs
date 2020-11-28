@@ -17,18 +17,26 @@ namespace bem_nested_generator
         public Form1()
         {
             InitializeComponent();
+
+            textBox1.GotFocus += onGotFocusTextBox;
+            textBox1.LostFocus += onLostFocusTextBox;
         }
 
         private ArrayList getAllClass(string html)
         {
             ArrayList allClass = new ArrayList();
 
-            var matchesAllClasses = Regex.Matches(html, "class = \"([\\sA-Za-z_]{1,})\"");
+            var matchesAllClasses = Regex.Matches(html, "class\\s?=\\s?\"([-\\sA-Za-z_0-9]{1,})\"");
 
             foreach (Match matchclass in matchesAllClasses)
             {
-                allClass.Add(matchclass.Groups[1].Value);
+                if (!allClass.Contains(matchclass.Groups[1].Value)) 
+                {
+                    allClass.Add(matchclass.Groups[1].Value);
+                }
+               
             }
+            
 
             return allClass;
         }
@@ -39,7 +47,7 @@ namespace bem_nested_generator
 
             foreach (var cls in classes)
             {
-                Match block = Regex.Match((string)cls, "[a-z]{1,}");
+                Match block = Regex.Match((string)cls, "[a-z-]{1,}");
 
                 if (block.Value != "" && !allBlocks.Contains(block.Value))
                 {
@@ -142,6 +150,26 @@ namespace bem_nested_generator
             return elementModificators;
         }
 
+        private void onGotFocusTextBox(object sender, EventArgs e) 
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if (textBox.Text == "Выберите директорию") 
+            {
+                textBox.Text = "";
+            }
+        }
+
+        private void onLostFocusTextBox(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if (textBox.Text == "")
+            {
+                textBox.Text = "Выберите директорию";
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.ShowDialog();
@@ -155,8 +183,9 @@ namespace bem_nested_generator
         private void button1_Click(object sender, EventArgs e)
         {
             try
-            {
-                
+            {               
+
+
                 string ALL_HTML = richTextBox1.Text;
                 string PATH_TO_OUT_DIR = textBox1.Text;
 
