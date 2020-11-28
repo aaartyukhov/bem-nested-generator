@@ -26,7 +26,7 @@ namespace bem_nested_generator
         {
             ArrayList allClass = new ArrayList();
 
-            var matchesAllClasses = Regex.Matches(html, "class\\s?=\\s?\"([-\\sA-Za-z_0-9]{1,})\"");
+            var matchesAllClasses = Regex.Matches(html, "class\\s?=\\s?\"([-\\sA-Za-z_]{1,})\"");
 
             foreach (Match matchclass in matchesAllClasses)
             {
@@ -72,7 +72,7 @@ namespace bem_nested_generator
             {
                 foreach (var block in blocks)
                 {
-                    Match element = Regex.Match((string)cls, block + "(__[a-z]{1,})");
+                    Match element = Regex.Match((string)cls, block + "(__[-a-z]{1,})");
 
                     if (element.Value != "")
                     {
@@ -96,7 +96,7 @@ namespace bem_nested_generator
             {
                 foreach (var block in blocks)
                 {
-                    var modificators = Regex.Matches((string)cls, block + "(_[a-z]{1,})_[a-z]{1,}");
+                    var modificators = Regex.Matches((string)cls, block + "(_[-a-z]{1,})_[-a-z]{1,}");
 
                     foreach (Match modificator in modificators)
                     {
@@ -125,7 +125,7 @@ namespace bem_nested_generator
             {
                 foreach (var block in blocks)
                 {
-                    var modificators = Regex.Matches((string)cls, block + "(__[a-z]{1,})(_[a-z]{1,})(_[a-z]{1,})");
+                    var modificators = Regex.Matches((string)cls, block + "(__[-a-z]{1,})(_[-a-z]{1,})(_[-a-z]{1,})");
 
                     foreach (Match modificator in modificators)
                     {
