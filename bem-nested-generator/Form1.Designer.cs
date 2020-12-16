@@ -63,7 +63,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(688, 20);
             this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "Выберите директорию";
+            this.textBox1.Text = "Выберите выходную директорию";
             // 
             // button1
             // 

@@ -154,7 +154,7 @@ namespace bem_nested_generator
         {
             TextBox textBox = (TextBox)sender;
 
-            if (textBox.Text == "Выберите директорию") 
+            if (textBox.Text == "Выберите выходную директорию") 
             {
                 textBox.Text = "";
             }
@@ -166,7 +166,7 @@ namespace bem_nested_generator
 
             if (textBox.Text == "")
             {
-                textBox.Text = "Выберите директорию";
+                textBox.Text = "Выберите выходную директорию";
             }
         }
 
